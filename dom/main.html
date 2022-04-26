@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom/main.html</title>
+</head>
+<body>
+  <div id="addForm">
+    <form name="frm" action="../index.html" method="post" onsubmit="saveFnc(event)"> 
+    ID: <input type="text" name="uid" id="userId" value="101"><br>
+    Name: <input type="text" name="uname" id="userName" value="홍길동"><br>
+    Score: <input type="text" name="uscore" id="userScore" value="80"><br>
+    Age: <input type="text" name="uage" id="userAge" value="19"><br>
+    <input type="submit" value="저장">
+  </form>
+  </div>
+
+  <div id="show">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>아이디</th>
+          <th>이름</th>
+          <th>점수</th>
+          <th>나이</th>
+        </tr>
+      </thead>
+      <tbody id="body">
+
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    //페이지가 로딩된 후에 데이터를 화면에 뿌려주기
+    function init() {
+      let data = [
+                  {id:101, name:'홍길동', score:80, age:19},
+                  {id:101, name:'박길동', score:88, age:21},
+                  {id:101, name:'김길동', score:90, age:18}
+                 ];
+    //data 반복적으로 makeTr() -> id="body(=tbody)" appendChild();
+      data.forEach(function (person,ind) {
+        document.getElementById('body').appendChild(makeTr(person));
+      });
+    }
+    init(); //호출
+
+//    console.log(document.forms['frm'].elements[0].value); //form 태그(이름을 frm이라고 지정했으니까 frm도 사용가능)의 element들 중에서 0번째 value값을 읽어온다 OR elements['uid'] : element들 중에서 uid의 값을 읽어온다
+    function saveFnc(e) {
+      e.preventDefault(); //기본 기능을 차단 (저장버튼을 눌렀을 때 페이지가 넘어가지 않도록 한다)
+      let id = document.forms['frm'].elements['uid'].value;
+      let name = document.forms['frm'].elements['uname'].value;
+      let score = document.forms['frm'].elements['uscore'].value;
+      let age = document.forms['frm'].elements['uage'].value;
+
+      if(id == '' || name == '' || score == '' || age == '') {
+        alert('값을 입력하세요');
+        return; 
+      }
+
+      let person = {}
+      // let person = {
+      // id : id,
+      // name : name,
+      // score : score,
+      // age : age};
+      person.id = id;
+      person.name = name;
+      person.score = score;
+      person.age = age;
+
+      document.getElementById('body').appendChild(makeTr(person)); // 매개값으로 person이 오는 makeTr(함수) 의 결과를 tbody하위로 붙여넣기.. 
+      
+      //입력후 입력칸을 초기화
+      document.forms['frm'].elements['uid'].value = '';
+      document.forms['frm'].elements['uname'].value ='';
+      score = document.forms['frm'].elements['uscore'].value='';
+      age = document.forms['frm'].elements['uage'].value='';
+       
+      //입력칸에 깜빡 포커스
+      document.forms['frm'].elements['uid'].focus();
+      document.forms['frm'].elements['uname'].focus();
+      document.forms['frm'].elements['uscore'].focus();
+      document.forms['frm'].elements['uage'].focus();
+    }
+
+    //function makeTr(id ,name, score, age) { //id,name,score,age를 하나로 묶어보자 => obj로
+      function makeTr(obj) { //object 타입으로 값이 넘어오면 obj = {id:?, name:?, score:?, age:?} 각 속성에 해당하는 값을 td에 담아주려고 한다
+      let tr = document.createElement('tr');
+
+      for(let field in obj) {
+      let td = document.createElement('td');
+      td.innerHTML = obj[field]; //obj가 가지고 있는 field를 담아준다.. 처음에는 obj.id라는 값을, 다음은 obj.name, obj.score, obj.age의 값을 반복하면서 담아준다
+      tr.appendChild(td);
+    }
+    return tr;
+  }
+  </script>
+</body>
+</html>

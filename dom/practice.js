@@ -28,4 +28,6 @@ document.addEventListener('DOMContentLoaded', function() { //페이지가 다 �
   document.getElementById('show').appendChild(div1); //show라는 <div>에 자식요소 <div1>을 붙여준다 => 화면출력
   }); 
 
+  
+
 });
