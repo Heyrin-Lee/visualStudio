@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function(){
   let ul1 = document.createElement('ul');
   for(let m of menu) { //for of 반복문 시작: menu라는 배열의 값만큼 반복하는데 그 값들을 m에 담는다
     let li = document.createElement('li'); //menu 배열 속 값만큼 <li></li> 생성
-    li.innerHTML = m; //
+    li.innerHTML = m; //돌아가면서 menu 배열 속 읽어온 값들을 변수 m에 넣음 -> 차례대로 m에 있는 값들을 <li></li> 사이에 적으면 된다
 
     ul.appendChild(li);
   }

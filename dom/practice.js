@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() { //페이지가 다 �
   let btn = document.querySelector('button'); //button이라는 TAG를 찾아오겠다
   btn.addEventListener('click', function() { //버튼에 이벤트(click)가 발생할 때 실행될 메소드(function())를 설정한다
     //입력값1, 입력값2
-  let name = document.getElementById('userName').value; //userName이라는 ID의 value값을 읽어온다
+  let name = document.getElementById('userName').value; //userName이라는 ID의 value값을 읽어온 것을 name이라는 변수에 담는다
   let age = document.getElementById('userAge').value; //userAge이라는 ID의 value값을 읽어온다
 
     if(!name) {
