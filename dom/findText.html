@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom/findText.html</title>
+  <style>
+    #show {
+      width:300px;
+      height:300px;
+      background-color:yellow;
+    }
+    span {
+      display:inline-block;
+      width:86px;
+      height:20px;
+      margin:2px;
+      padding:2px;
+      border:1px solid red;
+    }
+
+    #show>span:nth-child(1) {
+      color:blue;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" name="" id="userVal">
+  <div id="show"></div>
+
+  <script>
+    let data = 
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Error hic vitae tempora quos quis, quo sint ipsam qui, molestias illum veritatis? Obcaecati numquam possimus minima, saepe praesentium nulla labore excepturi`;
+    let dataAry = data.split(' ');
+
+    let attach = document.getElementById('show');
+    dataAry.forEach(function (elem) {
+      let span = document.createElement('span');
+      span.innerHTML = elem;
+      attach.appendChild(span);
+    });
+
+    let user = document.getElementById('userVal');
+
+    //change 이벤트 설정
+    user.addEventListener('change', function() {
+      console.log(user.value);
+      let spans = document.querySelectorAll('span'); //span요소를 다 가져옴
+
+      //가져온 span요소를 사용자입력값과 각각 비교
+      spans.forEach(function (st, idx) { //input칸에 입력하는 값(user.value)은 <span>태그로 묶여있지 않기 때문에 st(<span>로 묶인 innerHTML)과 비교자체를 할 수 없어
+         //console.log(st);
+         if(user.value == st.innerHTML) { //값을 비교하기 위해서 st의 값을 <span>태그를 버리고 문자값만 가져와서 user.value와 값을 비교해서
+           document.querySelector(`#show>span:nth-child(${idx+1})`).style.display='none'; //아이디show 밑에 span을 가져오겠다 -> 그 중에서 첫번째 요소에 대한 스타일(디스플레이)를 none으로 설정하겠다(화면에서 없애겠다)
+          //st값의 index값과 user.value(input칸에 입력)값의 index값이 같으면 화면에서 지운다(index값을 비교하려고 value,index값을 가져왔다 *forEach(fucntion (st,idx)*)
+          //nth-child(${idx+1}): 자식태그는 1,2,3 배열은 0,1,2.. 이니까 +1을 해준다
+          //st.style.display = 'none';
+          }
+      });
+
+      user.value = '';
+    });
+  </script>
+</body>
+</html>
