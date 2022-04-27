@@ -74,7 +74,7 @@ addBtn.addEventListener('click', function(a) {
   let korScore1 = document.getElementById('kor').value;
   //날아다니는 값만 있는 상태
 
-  addStu = {};
+  let addStu = {};
   addStu.studNo = studNo1; //studNo:key값 studNo1:value값
   addStu.studName = studName1;
   addStu.engScore = engScore1;
