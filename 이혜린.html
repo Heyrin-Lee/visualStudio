@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="addFrm">
+<form action="" name="myFrm">
+    사용자아이디<input type="text" name="" id="uid"><br>
+    사용자이름<input type="text" name="" id="uname"><br>
+    이메일<input type="text" name="" id="umail"><br>
+    전화번호<input type="text" name="" id="utel"><br>
+    생년원일<input type="text" name="" id="ubirth"><br>
+    <input type="submit" value="등록">
+    <input type="button" value="삭제">
+</form>
+</div>
+
+    <div id="show">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>선택</th>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>전화번호</th>
+            <th>생년월일</th>
+        </tr>
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+    </table>
+    </div>
+
+<script>
+
+    let body = document.getElementById('body');
+
+    let saveBtn = document.querySelector('input[type="submit"]');
+    saveBtn.addEventListener('click', function(s) {
+        s.preventDefault();
+
+        let save = {};
+        let id = document.getElementById('uid').value;
+        let name = document.getElementById('uname').value;
+        let mail = document.getElementById('umail').value;
+        let tel = document.getElementById('utel').value;
+        let birth = document.getElementById('ubirth').value;
+
+        save.id = id;
+        save.name = name;
+        save.mail = mail;
+        save.tel = tel;
+        save.birth = birth;
+
+        document.getElementById('body').appendChild(makeTr(save)); //정의한 오브젝트가 save니까 
+
+    });
+
+    let delBtn = document.querySelector('input[type="button"]');
+    delBtn.addEventListener('click',function(d) {
+        let ttr = document.querySelectorAll('tr');
+        console.log(ttr.firstElementChild.firstElementChild);
+    })
+    
+
+    function makeTr(user) {
+        let tr = document.createElement('tr');
+
+        let checkbox = document.createElement('input');
+            checkbox.setAttribute("type","checkbox");
+            let td = document.createElement('td');
+            td.appendChild(checkbox);
+            tr.appendChild(td);
+            
+        for(let field in user) {
+            let td = document.createElement('td');
+            td.innerHTML = user[field];
+            tr.appendChild(td);
+        }
+        return tr;
+    }
+</script>
+</body>
+
+</html>
