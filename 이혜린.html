@@ -11,11 +11,11 @@
 <body>
 <div id="addFrm">
 <form action="" name="myFrm">
-    사용자아이디<input type="text" name="" id="uid"><br>
-    사용자이름<input type="text" name="" id="uname"><br>
-    이메일<input type="text" name="" id="umail"><br>
-    전화번호<input type="text" name="" id="utel"><br>
-    생년원일<input type="text" name="" id="ubirth"><br>
+    사용자아이디<input type="text" name="" id="uid" value="user1"><br>
+    사용자이름<input type="text" name="" id="uname" value="홍길동"><br>
+    이메일<input type="text" name="" id="umail" value="hong@mail.com"><br>
+    전화번호<input type="text" name="" id="utel" value="010-1234-5678"><br>
+    생년원일<input type="text" name="" id="ubirth" value="1988-2-18"><br>
     <input type="submit" value="등록">
     <input type="button" value="삭제">
 </form>
@@ -65,10 +65,15 @@
     });
 
     let delBtn = document.querySelector('input[type="button"]');
-    delBtn.addEventListener('click',function(d) {
-        let ttr = document.querySelectorAll('tr');
-        console.log(ttr.firstElementChild.firstElementChild);
-    })
+    delBtn.addEventListener('click',function() {
+        let ttr = document.querySelectorAll('#body>tr'); 
+            ttr.forEach(function(dd) {
+                if(dd.firstElementChild.firstElementChild.checked==true) {
+                    dd.remove();
+                }
+    });
+
+});
     
 
     function makeTr(user) {
