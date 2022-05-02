@@ -25,6 +25,7 @@
     <table border="1">
         <thead>
         <tr>
+            <th>순번</th>
             <th>선택</th>
             <th>아이디</th>
             <th>이름</th>
@@ -61,7 +62,7 @@
         save.birth = birth;
 
         document.getElementById('body').appendChild(makeTr(save)); //정의한 오브젝트가 save니까 
-
+        makeNo();
     });
 
     let delBtn = document.querySelector('input[type="button"]');
@@ -75,6 +76,12 @@
 
 });
     
+    function makeNo() {
+        let tr = document.querySelectorAll('#body>tr');
+        for(let i=0; i<ttr.length; i++) {
+            ttr[i].children[0].innerHTML = i+1;
+        }
+    }
 
     function makeTr(user) {
         let tr = document.createElement('tr');
