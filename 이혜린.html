@@ -54,15 +54,22 @@
         let mail = document.getElementById('umail').value;
         let tel = document.getElementById('utel').value;
         let birth = document.getElementById('ubirth').value;
-
+        //이렇게도 할 수 있지
+        //let id, name, email, tel, birth;
+        //id=document.querySelector('input[name=userId]').value;
+        
         save.id = id;
         save.name = name;
         save.mail = mail;
         save.tel = tel;
         save.birth = birth;
+        //let member = {id:id, name:name, email:email...}
+
 
         document.getElementById('body').appendChild(makeTr(save)); //정의한 오브젝트가 save니까 
         makeNo();
+        //let list = document.getElementyById('list');
+        //list.append( makeTr(member)); 
     });
 
     let delBtn = document.querySelector('input[type="button"]');
@@ -72,12 +79,18 @@
                 if(dd.firstElementChild.firstElementChild.checked==true) {
                     dd.remove();
                 }
+            //ttr.forEach(elem => {
+            // if(elem.firstElementChild.firstElementChild.checked == true) {
+            // elem.remove();
+            //}
+            //})
     });
 
 });
     
     function makeNo() {
         let tr = document.querySelectorAll('#body>tr');
+        let td = document.createElement('td');
         for(let i=0; i<ttr.length; i++) {
             ttr[i].children[0].innerHTML = i+1;
         }
@@ -92,9 +105,12 @@
             td.appendChild(checkbox);
             tr.appendChild(td);
             
-        for(let field in user) {
+            let no = document.createElement('td');
+            td.innerHTML = 
+
+        for(let field in user) { //{id:100, name:'hong', age:10..} 오브젝트 속 속성 만큼 반복
             let td = document.createElement('td');
-            td.innerHTML = user[field];
+            td.innerHTML = user[field]; //user['name'], user['age']..
             tr.appendChild(td);
         }
         return tr;
