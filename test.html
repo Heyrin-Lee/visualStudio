@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="form">
+        <form action="" name="frm">
+            도서코드 <input type="text" id="code" value="A1"><br>
+            도서명 <input type="text" id="title" value="책!책!책!"><br>
+            저자 <input type="text" id="author" value="책박사"><br>
+            출판사 <input type="text" id="publish" value="책 좀 읽으란 말이여"><br>
+            금액 <input type="number" id="price" value="12000"><br>
+            <input type="submit" value="저장">
+            <input type="button" value="선택삭제">
+        </form>
+    </div>
+
+    <div id="list">
+        <table border="1">
+            <thead>
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>도서코드</th>
+                <th>도서명</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>가격</th>
+                <th id="delete">삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        
+        let saveBtn = document.querySelector('input[type="submit"]');
+        saveBtn.addEventListener('click',function(s) {
+            s.preventDefault();
+
+            let save = {};
+            let bcode = document.getElementById('code').value;
+            let btitle = document.getElementById('title').value;
+            let bauthor = document.getElementById('author').value;
+            let bpublish = document.getElementById('publish').value;
+            let bprice = document.getElementById('price').value;
+
+            save.bcode = bcode;
+            save.btitle = btitle;
+            save.bauthor = bauthor;
+            save.bpublish = bpublish;
+            save.bprice = bprice;
+            
+            document.querySelector('tbody').appendChild(makeTr(save));
+        })
+
+        function makeTr(book) {
+            let tr = document.createElement('tr');
+        
+            let checkbox = document.createElement('input');
+            checkbox.setAttribute("type","checkbox");
+            let td = document.createElement('td');
+            tr.appendChild(td);
+            td.appendChild(checkbox);
+            let del = document.createElement('input');
+            del.setAttribute("type","button");
+            del.setAttribute("value","삭제");
+            deltd = document.createElement('td');
+            tr.appendChild(del);
+            
+            for(let field in book) {
+                let td = document.createElement('td');
+                td.innerHTML = book[field];
+                tr.appendChild(td);
+            }
+            return tr;
+        
+        }
+        </script>
+</body>
+</html>
